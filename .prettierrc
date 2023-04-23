@@ -1,0 +1,25 @@
+{
+  "tabWidth": 4,
+  "useTabs": false,
+  "singleQuote": true,
+  "quoteProps": "preserve",
+  "printWidth": 160,
+  "proseWrap":"never",
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "semi": true,
+  "arrowParens": "always",
+  "bracketSameLine": true,
+  "plugins": [
+        "@shufo/prettier-plugin-blade"
+    ],
+        "overrides": [
+    {
+        "files": ["*.blade.php"],
+        "options": {
+            "parser": "blade",
+            "wrapAttributes": "auto"
+        }
+    }
+    ]
+}

@@ -1,0 +1,12 @@
+#productCharsTable td {
+    border-bottom: 0;
+    border-top-width: 1px;
+    border-color: var(--main-gray500-color);
+    padding: 0.2rem 0 0.4rem 0;
+}
+
+pre {
+    white-space: pre-wrap;
+    color: var(--main-dark-color);
+    font-family: var(--bs-body-font-family);
+}
