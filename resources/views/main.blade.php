@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('stylesImports')
-<link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="{{asset('css/main.css')}}">
 @endsection
 
 @section('title')
@@ -82,7 +82,7 @@ CHIPIX
 </div>
 
 {{-- О нас --}}
-<div id="aboutUsSection" class="pb-5">
+<div id="aboutUsSection">
     <div class="sectionTitle bg-main-dark py-3 my-5">
         <h2 class="text-main-white text-center fw-normal m-0">О нас</h2>
     </div>
@@ -159,6 +159,68 @@ CHIPIX
         </div>
 
         <p class="fs-18 my-5">Многолетний опыт работы и устойчивое партнерство с крупнейшими поставщиками позволяет нам обеспечивать стабильность поставок высококачественных товаров отечественного и импортного производства, а партнёрский открытый стиль работы с заказчиком снискали доверие и взаимопонимание многочисленных клиентов. Среди них: высшие учебные заведения, все силовые ведомства и структуры, администрация, коммерческие банки и многие крупные компании республики.</p>
+    </div>
+</div>
+
+{{-- Контакты и форма --}}
+<div id="contactsAndFormSection" class="pb-5 mb-5">
+    <div class="sectionTitle bg-main-dark py-3 my-5">
+        <h2 class="text-main-white text-center fw-normal m-0">Контакты</h2>
+    </div>
+    <div class="container">
+        <div class="row row-cols-lg-2 row-cols-1 gy-5 gy-lg-0 gx-lg-5">
+            <div class="col">
+                <div class="row row-cols-1 row-cols-sm-2 gy-4">
+                    <div class="col contacts-card d-flex flex-column align-items-center align-items-lg-start">
+                        <img src="{{asset('img/mapPointDark.svg')}}" alt="map point" class="mb-3">
+                        <p class="fw-bold fs-3">Адрес</p>
+                        <p class="text-center text-lg-start">603105, Нижний Новгород, ул. Салганская, 30</p>
+                    </div>
+
+                    <div class="col contacts-card d-flex flex-column align-items-center align-items-lg-start">
+                        <img src="{{asset('img/phoneDark.svg')}}" alt="map point" class="mb-3">
+                        <p class="fw-bold fs-3">Телефон</p>
+                        <p class="text-center text-lg-start">+7 (831) 224-86-51</p>
+                    </div>
+
+                    <div class="col contacts-card d-flex flex-column align-items-center align-items-lg-start">
+                        <img src="{{asset('img/mailDark.svg')}}" alt="map point" class="mb-3">
+                        <p class="fw-bold fs-3">Email</p>
+                        <p class="text-center text-lg-start">chipix@ustnn.net</p>
+                    </div>
+
+                    <div class="col contacts-card d-flex flex-column align-items-center align-items-lg-start">
+                        <img src="{{asset('img/clockDark.svg')}}" alt="map point" class="mb-3">
+                        <p class="fw-bold fs-3">Время работы</p>
+                        <p class="text-center text-lg-start">Понедельник - Пятница 9:00 - 18:00 MSK</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <form class="ps-lg-5">
+                    <div class="mb-4">
+                        <input type="text" class="form-control input-main rounded-0" id="name" name="name" placeholder="Как к вам обращаться">
+                    </div>
+
+                    <div class="mb-4">
+                        <input type="text" class="form-control input-main rounded-0" id="phone" name="phone" placeholder="Номер телефона">
+                    </div>
+
+                    <div class="mb-4">
+                        <input type="email" class="form-control input-main rounded-0" id="email" name="email" placeholder="Email">
+                    </div>
+
+                    <div class="mb-4">
+                        <textarea type="text" class="form-control input-main rounded-0" id="text" name="text" placeholder="Сообщение"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-main-dark rounded-0">Отправить сообщение</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection

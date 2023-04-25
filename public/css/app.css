@@ -96,6 +96,12 @@
 }
 
 
+.input-main:focus {
+    border-color: var(--main-dark-color);
+    box-shadow: none;
+}
+
+
 a:hover {
     color: var(--main-white-color);
 }
@@ -108,12 +114,12 @@ body {
 body {
     display: flex;
     flex-direction: column;
+    color: var(--main-dark-color);
 }
 
 .main {
     flex: auto;
 }
-
 #headerInfo {
     height: 28px;
 }

@@ -52,6 +52,10 @@
     height: 5rem;
 }
 
+.contacts-card>img {
+    width: 2.5rem;
+}
+
 @media (max-width: 991px) {
 
     .carousel-item .slide-img {

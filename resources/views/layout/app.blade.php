@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @yield('stylesImports')
     <title>@yield('title')</title>
 </head>
@@ -14,7 +14,9 @@
     <div class="main">
         @yield('main')
     </div>
+    @if (Request::path() !== 'admin')
     @include('layout.footer')
-    <script src="./js/app.js"></script>
+    @endif
+    <script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>

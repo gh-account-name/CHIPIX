@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse justify-content-end mt-4 mt-lg-0" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-main-white fs-18" aria-current="page" href="#aboutUsSection">О компании</a>
+                        <a class="nav-link text-main-white fs-18" aria-current="page" href="{{route('mainPage')}}#aboutUsSection">О компании</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -57,6 +57,12 @@
                     <li class="nav-item">
                         <a class="nav-link text-main-white fs-18" href="#">Поддержка</a>
                     </li>
+
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link text-main-white fs-18" href="{{route('admin-logout')}}">Выйти</a>
+                    </li>
+                    @endauth
                 </ul>
 
                 <div id="headerInfoColapsed" class="bg-main-gray800 rounded-2 mt-3">
