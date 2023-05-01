@@ -1,7 +1,8 @@
 @extends('layout.app')
 
 @section('stylesImports')
-<link rel="stylesheet" href="{{asset('css/product.css')}}">
+{{-- <link rel="stylesheet" href="{{asset('css/product.css')}}"> --}}
+@vite('resources/css/product.css')
 @endsection
 
 @section('title')

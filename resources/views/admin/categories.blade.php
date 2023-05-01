@@ -5,7 +5,6 @@
 @endsection
 
 @section('main')
-<div class="container">
-
+<div id="app">
 </div>
 @endsection

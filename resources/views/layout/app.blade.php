@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- <link rel="stylesheet" href="{{asset('css/app.css')}}"> --}}
     @yield('stylesImports')
     <title>@yield('title')</title>
 </head>
@@ -14,9 +14,18 @@
     <div class="main">
         @yield('main')
     </div>
-    @if (Request::path() !== 'admin')
+    @if (!str_contains(Request::path(), 'admin'))
     @include('layout.footer')
     @endif
-    <script src="{{asset('js/app.js')}}"></script>
+
+    @if (str_contains(Request::path(), 'admin'))
+    @vite('resources/js/admin.js')
+    @endif
+
+    {{-- <script src="{{asset('js/app.js')}}"></script>
+
+    @if (str_contains(Request::path(), 'admin'))
+    <script src="{{asset('js/admin.js')}}"></script>
+    @endif --}}
 </body>
 </html>
