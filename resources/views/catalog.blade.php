@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-7 p-0 mt-3 mt-md-0">
                         <p>Gorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. </p>
-                        <a href="{{route('productPage')}}" class="btn btn-main-dark rounded-0">Подробнее</a>
+                        <a href="{{route('productPage')}}" class="btn btn-main-dark">Подробнее</a>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-7 p-0 mt-3 mt-md-0">
                         <p>Gorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. </p>
-                        <a href="#" class="btn btn-main-dark rounded-0">Подробнее</a>
+                        <a href="#" class="btn btn-main-dark">Подробнее</a>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-7 p-0 mt-3 mt-md-0">
                         <p>Gorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. </p>
-                        <a href="#" class="btn btn-main-dark rounded-0">Подробнее</a>
+                        <a href="#" class="btn btn-main-dark">Подробнее</a>
                     </div>
                 </div>
             </div>

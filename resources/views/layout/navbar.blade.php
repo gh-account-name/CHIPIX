@@ -19,6 +19,7 @@
             </div>
         </div>
     </div>
+
     <nav class="navbar navbar-dark navbar-expand-lg bg-main-dark">
         <div class="container-fluid container">
             <a class="navbar-brand p-0 m-0" href="{{route('mainPage')}}"><img src="{{asset('img/logo.svg')}}" id="logo" alt="log"></a>
@@ -27,32 +28,37 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end mt-4 mt-lg-0" id="navbarSupportedContent">
                 <ul class="navbar-nav">
+
+                    @auth('admin')
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-main-white fs-18" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Админ
+                        </a>
+                        <ul class="dropdown-menu rounded-0">
+                            <li><a class="dropdown-item" href="{{route('admin-categoriesPage')}}">Категории</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    @endauth
+
                     <li class="nav-item">
                         <a class="nav-link text-main-white fs-18" aria-current="page" href="{{route('mainPage')}}#aboutUsSection">О компании</a>
                     </li>
 
+                    @foreach ($directions as $direction)
                     <li class="nav-item dropdown">
                         <a class="nav-link text-main-white fs-18" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Корпоративное направление
+                            {{$direction->title}}
                         </a>
-                        <ul class="dropdown-menu">
-                            {{-- Заменить ссылку --}}
-                            <li><a class="dropdown-item" href="{{route('catalogPage')}}">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <ul class="dropdown-menu rounded-0">
+                            @foreach ($direction->categories as $category)
+                            <li><a class="dropdown-item" href="{{route('catalogPage')}}">{{$category->title}}</a>
+                            </li>
+                            @endforeach
                         </ul>
                     </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link text-main-white fs-18" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Направление госзакупок
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+                    @endforeach
 
                     <li class="nav-item">
                         <a class="nav-link text-main-white fs-18" href="#">Поддержка</a>

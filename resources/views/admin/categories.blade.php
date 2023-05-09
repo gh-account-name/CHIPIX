@@ -5,6 +5,6 @@
 @endsection
 
 @section('main')
-<div id="app">
+<div id="categoriesPage">
 </div>
 @endsection

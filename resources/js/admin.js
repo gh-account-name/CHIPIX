@@ -1,12 +1,4 @@
 import { createApp } from 'vue/dist/vue.esm-bundler';
-import TryComp from './components/tryComp.vue';
+import CategoriesPage from './pages/CategoriesPage.vue';
 
-createApp({
-    data() {
-        return {
-            count: 12,
-        };
-    },
-    components: { 'TryComp': TryComp },
-    template: `<TryComp />`,
-}).mount('#app');
+createApp(CategoriesPage).mount('#categoriesPage');

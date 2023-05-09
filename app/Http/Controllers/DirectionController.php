@@ -10,9 +10,10 @@ class DirectionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function get()
     {
-        //
+        $directions = Direction::with('categories')->get();
+        return response()->json(['directions' => $directions]);
     }
 
     /**

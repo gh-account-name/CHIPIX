@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Direction extends Model
 {
     use HasFactory;
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

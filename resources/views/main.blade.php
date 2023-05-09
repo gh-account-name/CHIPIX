@@ -201,23 +201,23 @@ CHIPIX
             <div class="col">
                 <form class="ps-lg-5">
                     <div class="mb-4">
-                        <input type="text" class="form-control input-main rounded-0" id="name" name="name" placeholder="Как к вам обращаться">
+                        <input type="text" class="form-control input-main" id="name" name="name" placeholder="Как к вам обращаться">
                     </div>
 
                     <div class="mb-4">
-                        <input type="text" class="form-control input-main rounded-0" id="phone" name="phone" placeholder="Номер телефона">
+                        <input type="text" class="form-control input-main" id="phone" name="phone" placeholder="Номер телефона">
                     </div>
 
                     <div class="mb-4">
-                        <input type="email" class="form-control input-main rounded-0" id="email" name="email" placeholder="Email">
+                        <input type="email" class="form-control input-main" id="email" name="email" placeholder="Email">
                     </div>
 
                     <div class="mb-4">
-                        <textarea type="text" class="form-control input-main rounded-0" id="text" name="text" placeholder="Сообщение"></textarea>
+                        <textarea type="text" class="form-control input-main" id="text" name="text" placeholder="Сообщение"></textarea>
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-main-dark rounded-0">Отправить сообщение</button>
+                        <button type="submit" class="btn btn-main-dark">Отправить сообщение</button>
                     </div>
                 </form>
             </div>

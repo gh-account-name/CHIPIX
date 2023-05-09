@@ -80,15 +80,31 @@
     --bs-btn-active-color: var(--main-white-color);
     --bs-btn-active-bg: var(--main-gray800-color);
     --bs-btn-active-border-color: var(--main-gray500-color);
-    --bs-btn-border-radius: 2px;
+    --bs-btn-border-radius: 0;
 }
 
 .btn-main-big {
     width: 20rem;
     font-size: var(--fs-36);
     box-shadow: 0px 12px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
 }
 
+.btn-main-dark:disabled {
+    opacity: 0.3;
+    color: var(--main-white-color);
+    background-color: var(--main-dark-color);
+    border-color: var(--main-dark-color);
+}
+
+.input-main {
+    border-radius: 0;
+}
+
+.input-main[type=checkbox],
+.input-main[type=checkbox]~.form-label {
+    cursor: pointer;
+}
 
 .input-main:focus {
     border-color: var(--main-dark-color);
