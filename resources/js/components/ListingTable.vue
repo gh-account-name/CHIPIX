@@ -14,7 +14,12 @@
                 <tr v-for="(item, index) in data" :key="item.id">
                     <th class="col-1" scope="row">{{ index + 1 }}</th>
 
-                    <td v-for="column in columns" :key="column[0]">{{ item[column[1]] }}</td>
+                    <template v-for="column in columns" :key="column[0]">
+                        <td v-if="column[1].includes('.')">
+                            <p class="mb-1" v-for="val in extractValues(item, column[1])">{{ val }}</p>
+                        </td>
+                        <td v-else>{{ item[column[1]] }}</td>
+                    </template>
 
                     <td class="col-3">
                         <button class="btn btn-warning rounded-0 fs-14 me-lg-3 me-xl-5 mb-lg-0 mb-2" @click="editItem(item)">Редактировать</button>
@@ -47,10 +52,26 @@ export default {
             // вызов функции редактирования элемента
             this.$emit("edit-item", item);
         },
+
         deleteItem(item) {
             // вызов функции удаления элемента
             this.$emit("delete-item", item);
         },
+
+        extractValues(obj, key) {
+            const keys = key.split('.');
+            let value = obj;
+
+            for (const nestedKey of keys) {
+                if (Array.isArray(value)) {
+                    value = value.map((item) => item[nestedKey]);
+                } else {
+                    value = value[nestedKey];
+                }
+            }
+
+            return value || [];
+        }
     },
     components: { Modal }
 };

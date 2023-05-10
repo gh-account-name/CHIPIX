@@ -14,7 +14,8 @@
             </form>
         </Modal>
 
-        <ListingTable ref="listingTable" class="mt-5" :columns="[['Название', 'title']]" :data="categories" @edit-item="openEditModal" @delete-item="openDeleteModal" />
+        <ListingTable ref="listingTable" class="mt-5" :columns="[['Название', 'title'], ['Направления', 'directions.title']]" :data="categories" @edit-item="openEditModal"
+            @delete-item="openDeleteModal" />
 
         <Modal ref="editModal" id="editModal" :titleText='`Редактировать категорию "${selectedItem?.title}"`' closeButtonText="Отмена" confirmButtonText="Редактировать" type="warning"
             @confirm="editItem">
