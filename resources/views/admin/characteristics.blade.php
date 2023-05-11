@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-Категории
+Характеристики
 @endsection
 
 @section('main')

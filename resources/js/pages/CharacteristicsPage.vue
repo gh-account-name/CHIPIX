@@ -1,40 +1,39 @@
 <template>
-    <PageTitle title="Категории" />
+    <PageTitle title="Характеристики" />
 
     <div class="container">
         <Message :text="message" ref="notification" :type="messageType" />
 
-        <Modal ref="addModal" id="addModal" titleText="Добавить категорию" openButtonText="Добавить" closeButtonText="Отмена" confirmButtonText="Добавить" @confirm="addCategory">
+        <Modal ref="addModal" id="addModal" titleText="Добавить характеристику" openButtonText="Добавить" closeButtonText="Отмена" confirmButtonText="Добавить" @confirm="addCategory">
             <form id="addForm" ref="addForm">
                 <InputV name="title" id="title" placeholder="Название" :errors="errors.title" />
-                <div class="mt-3 fw-bold">Добавить категорию в:</div>
-                <span class="text-danger" v-if="errors.directions">{{ errors.directions[0] }}</span>
-                <CheckboxV v-for="direction in directions" :labelText="direction.title" :value="direction.id" name="directions[]" :id="`direction${direction.id}`"
-                    wrapperClasses="mt-3" />
+                <div class="mt-3 fw-bold">Присутствует у следующих категорий товаров:</div>
+                <span class="text-danger" v-if="errors.categories">{{ errors.categories[0] }}</span>
+                <CheckboxV v-for="category in categories" :labelText="category.title" :value="category.id" name="categories[]" :id="`category${category.id}`" wrapperClasses="mt-3" />
             </form>
         </Modal>
 
-        <ListingTable ref="listingTable" class="mt-5" :columns="[['Название', 'title'], ['Направления', 'directions.title']]" :data="categories"
+        <ListingTable ref="listingTable" class="mt-5" :columns="[['Название', 'title'], ['В категориях', 'categories.title']]" :data="characteristics"
             :isLoading="isLoading && isFirstLoading" @edit-item="openEditModal" @delete-item="openDeleteModal" />
 
-        <Modal ref="editModal" id="editModal" :titleText='`Редактировать категорию "${selectedItem?.title}"`' closeButtonText="Отмена" confirmButtonText="Редактировать" type="warning"
-            @confirm="editItem">
+        <Modal ref="editModal" id="editModal" :titleText='`Редактировать характеристику "${selectedItem?.title}"`' closeButtonText="Отмена" confirmButtonText="Редактировать"
+            type="warning" @confirm="editItem">
             <form id="editForm" ref="editForm">
                 <InputV name="title" id="title" placeholder="Название" :value="selectedItem?.title" :errors="errors.title" />
 
-                <CheckboxV labelText="Изменить направления" id="isEditingCheckbox" name="isEditingDirections" :value="editingDirections" :isCheckedModel="editingDirections"
-                    @update:isCheckedModel="newValue => editingDirections = newValue" wrapperClasses="mt-3" />
+                <CheckboxV labelText="Изменить категории" id="isEditingCheckbox" name="isEditingCategories" :value="editingCategories" :isCheckedModel="editingCategories"
+                    @update:isCheckedModel="newValue => editingCategories = newValue" wrapperClasses="mt-3" />
 
-                <div v-if="editingDirections">
-                    <div class="mt-3 fw-bold">Добавить категорию в:</div>
-                    <span class="text-danger" v-if="errors.directions">{{ errors.directions[0] }}</span>
-                    <CheckboxV v-for="direction in directions" :labelText="direction.title" :value="direction.id" name="directions[]" :id="`editedDirection${direction.id}`"
-                        wrapperClasses="mt-3" :checked="isInDirection(direction, selectedItem?.id)" />
+                <div v-if="editingCategories">
+                    <div class="mt-3 fw-bold">Присутствует у следующих категорий товаров:</div>
+                    <span class="text-danger" v-if="errors.categories">{{ errors.categories[0] }}</span>
+                    <CheckboxV v-for="category in categories" :labelText="category.title" :value="category.id" name="categories[]" :id="`editedCategory${category.id}`"
+                        wrapperClasses="mt-3" :checked="isInCategory(category, selectedItem?.id)" />
                 </div>
             </form>
         </Modal>
 
-        <Modal ref="deleteModal" id="deleteModal" :titleText='`Подтвердите удаление категории "${selectedItem?.title}"`' closeButtonText="Отмена" confirmButtonText="Удалить"
+        <Modal ref="deleteModal" id="deleteModal" :titleText='`Подтвердите удаление характеристики "${selectedItem?.title}"`' closeButtonText="Отмена" confirmButtonText="Удалить"
             type="danger" @confirm="deleteItem" />
     </div>
 </template>
@@ -56,23 +55,24 @@ export default {
             errors: [],
             isLoading: false,
             isFirstLoading: true,
+            characteristics: [],
             categories: [],
-            directions: [],
             selectedItem: null,
-            editingDirections: false,
+            editingCategories: false,
         }
     },
 
 
     methods: {
+
+        async getCharacteristics() {
+            const response = await window.axios.get('get/characteristic');
+            this.characteristics = response.data.characteristics;
+        },
+
         async getCategories() {
             const response = await window.axios.get('get/category');
             this.categories = response.data.categories;
-        },
-
-        async getDirections() {
-            const response = await window.axios.get('get/direction');
-            this.directions = response.data.directions;
         },
 
         async addCategory() {
@@ -82,7 +82,7 @@ export default {
             this.isLoading = true;
 
             try {
-                const response = await window.axios.post('add/category', formData);
+                const response = await window.axios.post('add/characteristic', formData);
 
                 this.$refs.addModal.close();
 
@@ -92,8 +92,8 @@ export default {
                 this.message = response.data;
                 this.$refs.notification.open();
 
+                this.getCharacteristics();
                 this.getCategories();
-                this.getDirections();
 
             } catch (error) {
                 this.errors = error.response.data;
@@ -115,20 +115,20 @@ export default {
                 this.isLoading = true;
 
                 try {
-                    const response = await window.axios.post(`update/category/${this.selectedItem.id}`, formData);
+                    const response = await window.axios.post(`update/characteristic/${this.selectedItem.id}`, formData);
 
                     this.$refs.editModal.close();
 
                     this.$refs.editForm.reset();
                     this.selectedItem = null;
-                    this.editingDirections = false;
+                    this.editingCategories = false;
 
                     this.messageType = 'warning';
                     this.message = response.data;
                     this.$refs.notification.open();
 
+                    this.getCharacteristics();
                     this.getCategories();
-                    this.getDirections();
 
                 } catch (error) {
                     this.errors = error.response.data;
@@ -151,7 +151,7 @@ export default {
                 this.isLoading = true;
 
                 try {
-                    const response = await window.axios.post(`delete/category/${this.selectedItem.id}`);
+                    const response = await window.axios.post(`delete/characteristic/${this.selectedItem.id}`);
 
                     this.$refs.deleteModal.close();
 
@@ -161,7 +161,7 @@ export default {
                     this.message = response.data;
                     this.$refs.notification.open();
 
-                    this.getCategories();
+                    this.getCharacteristics();
 
                 } catch (error) {
                     console.error(error);
@@ -184,9 +184,9 @@ export default {
             this.$refs.deleteModal.open();
         },
 
-        isInDirection(direction, categoryId) {
-            for (let category of direction.categories) {
-                if (category.id == categoryId) {
+        isInCategory(category, characteristicId) {
+            for (let characteristic of category.characteristics) {
+                if (characteristic.id == characteristicId) {
                     return true
                 }
             }
@@ -196,8 +196,8 @@ export default {
         async firstLoad() {
             this.isLoading = true;
             try {
+                await this.getCharacteristics();
                 await this.getCategories();
-                await this.getDirections();
             } catch (error) {
                 console.error(error);
                 this.messageType = 'danger';
@@ -207,6 +207,7 @@ export default {
             this.isLoading = false;
             this.isFirstLoading = false;
         }
+
     },
 
 

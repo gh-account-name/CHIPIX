@@ -3,7 +3,7 @@
         <div class="modal-dialog">
             <div class="modal-content rounded-0">
                 <div :class="`modal-body alert alert-${type} m-0 text-center`">
-                    {{ text }}
+                    <div class="html-content" v-html="text"></div>
                 </div>
             </div>
         </div>

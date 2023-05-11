@@ -36,7 +36,7 @@
                         </a>
                         <ul class="dropdown-menu rounded-0">
                             <li><a class="dropdown-item" href="{{route('admin-categoriesPage')}}">Категории</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="{{route('admin-characteristicsPage')}}">Характеристики</a></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>

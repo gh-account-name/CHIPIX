@@ -13,4 +13,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Direction::class);
     }
+
+    public function characteristics()
+    {
+        return $this->belongsToMany(Characteristic::class);
+    }
 }

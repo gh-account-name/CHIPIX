@@ -1,6 +1,6 @@
 <template>
-    <div class="tableWrapper">
-        <table class="table table-hover">
+    <div class="tableWrapper table-responsive">
+        <table class="table table-hover table-responsive">
             <thead class="bg-main-dark text-main-white">
                 <tr>
                     <th class="col-1" scope="col">#</th>
@@ -11,7 +11,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in data" :key="item.id">
+                <!-- Скелетики 💀💀 -->
+                <tr v-if="isLoading" v-for="index in 3">
+                    <th class="col-1 placeholder-glow" scope="row"><span class="placeholder col-12"></span></th>
+
+                    <template v-for="column in columns" :key="column[0]">
+                        <td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+                    </template>
+
+                    <td class="col-3 placeholder-glow">
+                        <button class="btn placeholder rounded-0 fs-14 me-lg-3 me-xl-5 mb-lg-0 mb-2"><span class="opacity-0">Редактировать</span></button>
+                        <button class="btn placeholder rounded-0 fs-14"><span class="opacity-0">Удалить</span></button>
+                    </td>
+                </tr>
+
+                <tr v-else v-for="(item, index) in data" :key="item.id">
                     <th class="col-1" scope="row">{{ index + 1 }}</th>
 
                     <template v-for="column in columns" :key="column[0]">
@@ -28,7 +42,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="text-center fw-bold w-100 fs-3" v-if="data.length == 0">Нет данных</div>
+        <div class="text-center fw-bold w-100 fs-3" v-if="data.length == 0 && !isLoading">Нет данных</div>
     </div>
 </template>
 
@@ -45,6 +59,10 @@ export default {
             type: Array,
             required: true,
         },
+        isLoading: {
+            type: Boolean,
+            default: false,
+        }
     },
 
     methods: {
@@ -76,3 +94,14 @@ export default {
     components: { Modal }
 };
 </script>
+
+<style>
+.placeholder {
+    vertical-align: top;
+}
+
+button.placeholder {
+    background-color: currentColor !important;
+    pointer-events: none;
+}
+</style>

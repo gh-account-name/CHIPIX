@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CharacteristicController;
 use App\Http\Controllers\DirectionController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::controller(PageController::class)->group(function () {
 
         Route::get('/categories', 'categoriesPage')->name('categoriesPage');
+
+        Route::get('/characteristics', 'characteristicsPage')->name('characteristicsPage');
     });
 
 
@@ -43,5 +46,17 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/update/category/{category?}', 'update')->name('updateCategory');
 
         Route::post('/delete/category/{category?}', 'destroy')->name('deleteCategory');
+    });
+
+
+    Route::controller(CharacteristicController::class)->group(function () {
+
+        Route::get('/get/characteristic', 'get')->name('getCharacteristics');
+
+        Route::post('/add/characteristic', 'store')->name('addCharacteristic');
+
+        Route::post('/update/characteristic/{characteristic?}', 'update')->name('updateCharacteristic');
+
+        Route::post('/delete/characteristic/{characteristic?}', 'destroy')->name('deleteCharacteristic');
     });
 });

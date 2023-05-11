@@ -7,11 +7,18 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function authPage() {
+    public function authPage()
+    {
         return view('admin.auth');
     }
 
-    public function categoriesPage() {
+    public function categoriesPage()
+    {
         return view('admin.categories');
+    }
+
+    public function characteristicsPage()
+    {
+        return view('admin.characteristics');
     }
 }

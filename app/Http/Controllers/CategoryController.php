@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function get()
     {
-        $categories = Category::with('directions')->get();
+        $categories = Category::with('directions', 'characteristics')->get();
         return response()->json(['categories' => $categories]);
     }
 
