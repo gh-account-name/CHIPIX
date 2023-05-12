@@ -13,7 +13,7 @@
             <CheckboxV labelText="В обратном порядке" id="isReversedCheckbox" v-model="isReversed" />
         </div>
     </div>
-    <slot :data="returnData">
+    <slot :processedData="returnData">
     </slot>
 </template>
 

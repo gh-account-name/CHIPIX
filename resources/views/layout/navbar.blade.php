@@ -64,7 +64,7 @@
                         <a class="nav-link text-main-white fs-18" href="#">Поддержка</a>
                     </li>
 
-                    @auth
+                    @auth('admin')
                     <li class="nav-item">
                         <a class="nav-link text-main-white fs-18" href="{{route('admin-logout')}}">Выйти</a>
                     </li>

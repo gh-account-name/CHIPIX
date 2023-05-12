@@ -13,16 +13,20 @@
             </form>
         </Modal>
 
-        <ListingTable ref="listingTable" class="mt-5" :columns="[['Название', 'title'], ['В категориях', 'categories.title']]" :data="characteristics"
-            :isLoading="isLoading && isFirstLoading" @edit-item="openEditModal" @delete-item="openDeleteModal" />
+        <SortFilter :data="characteristics" :searchKeys="['title', 'id']" :sortKeys="{ title: 'Название' }" :reverseButton="true" class="mt-3 mt-md-5">
+            <template v-slot="{ processedData }">
+                <ListingTable ref="listingTable" class="mt-5" :columns="[['Название', 'title'], ['В категориях', 'categories.title']]" :data="processedData"
+                    :isLoading="isLoading && isFirstLoading" @edit-item="openEditModal" @delete-item="openDeleteModal" />
+            </template>
+        </SortFilter>
 
         <Modal ref="editModal" id="editModal" :titleText='`Редактировать характеристику "${selectedItem?.title}"`' closeButtonText="Отмена" confirmButtonText="Редактировать"
             type="warning" @confirm="editItem">
             <form id="editForm" ref="editForm">
                 <InputV name="title" id="title" placeholder="Название" :value="selectedItem?.title" :errors="errors.title" />
 
-                <CheckboxV labelText="Изменить категории" id="isEditingCheckbox" name="isEditingCategories" :value="editingCategories" :isCheckedModel="editingCategories"
-                    @update:isCheckedModel="newValue => editingCategories = newValue" wrapperClasses="mt-3" />
+                <CheckboxV labelText="Изменить категории" id="isEditingCheckbox" name="isEditingCategories" :value="editingCategories" v-model="editingCategories"
+                    wrapperClasses="mt-3" />
 
                 <div v-if="editingCategories">
                     <div class="mt-3 fw-bold">Присутствует у следующих категорий товаров:</div>
@@ -45,6 +49,7 @@ import InputV from '../components/InputV.vue';
 import CheckboxV from '../components/CheckboxV.vue';
 import Message from '../components/Message.vue';
 import ListingTable from '../components/ListingTable.vue';
+import SortFilter from '../components/SortFilter.vue';
 
 
 export default {
@@ -216,7 +221,7 @@ export default {
     },
 
 
-    components: { PageTitle, Modal, InputV, CheckboxV, Message, ListingTable },
+    components: { PageTitle, Modal, InputV, CheckboxV, Message, ListingTable, SortFilter },
 
 };
 </script>

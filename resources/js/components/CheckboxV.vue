@@ -1,7 +1,7 @@
 <template>
     <div :class="['inputWrapper', wrapperClasses]">
-        <input type="checkbox" v-bind="$attrs" class="form-check-input me-1 input-main rounded-0" :checked="isCheckedModel || $attrs.checked"
-            @change="$emit('update:isCheckedModel', $event.target.checked)">
+        <input type="checkbox" v-bind="$attrs" class="form-check-input me-1 input-main rounded-0" :checked="modelValue || $attrs.checked"
+            @change="$emit('update:modelValue', $event.target.checked)">
 
         <label v-if="labelText" :class="[errors ? 'is-invalid' : '', 'form-label m-0', labelClasses]" :for="$attrs.id">{{ labelText }}</label>
 
@@ -19,8 +19,8 @@ export default {
         wrapperClasses: String,
         labelText: String,
         labelClasses: String,
-        isCheckedModel: Boolean,
+        modelValue: Boolean,
     },
-    emits: ['update:isCheckedModel']
+    emits: ['update:modelValue']
 }
 </script>
