@@ -32,10 +32,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'title' => ['required'],
+            'title' => ['required', 'unique:categories'],
             'directions' => ['required'],
         ], [
             'title.required' => '*Заполните это поле',
+            'title.unique' => '*Такая категория уже существует',
             'directions.required' => '*Выберите хотя бы одно направление',
         ]);
 
@@ -73,10 +74,11 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $validation = Validator::make($request->all(), [
-            'title' => ['required'],
+            'title' => ['required', 'unique:categories,title,' . $category->id],
             'directions' => ['required_if:isEditingDirections,true']
         ], [
             'title.required' => '*Заполните это поле',
+            'title.unique' => '*Такая категория уже существует',
             'directions.required_if' => '*Выберите хотя бы одно направление',
         ]);
 

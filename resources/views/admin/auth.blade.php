@@ -7,7 +7,7 @@
 @section('main')
 <div class="container">
     @if (session()->has('error'))
-    <div class="alert text-center alert-danger col-lg-5 mt-5 mx-auto">
+    <div class="alert text-center alert-danger col-lg-5 mt-5 mx-auto rounded-0">
         {{session('error')}}
     </div>
     @endif

@@ -10,24 +10,25 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $data = $request->validate([
             'login' => 'required',
             'password' => 'required',
         ], [
-            'login.required' => 'Заполните это поле',
-            'password.required' => 'Заполните это поле',
+            'login.required' => '*Заполните это поле',
+            'password.required' => '*Заполните это поле',
         ]);
 
-        if(auth('admin')->attempt($data)){
+        if (auth('admin')->attempt($data)) {
             return redirect()->route('admin-categoriesPage');
         } else {
             return redirect()->back()->with('error', 'Неверный логин или пароль');
         }
-
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('mainPage');
     }

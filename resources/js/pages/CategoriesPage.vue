@@ -1,7 +1,7 @@
 <template>
     <PageTitle title="Категории" />
 
-    <div class="container">
+    <div class="container pb-5">
         <Message :text="message" ref="notification" :type="messageType" />
 
         <Modal ref="addModal" id="addModal" titleText="Добавить категорию" openButtonText="Добавить" closeButtonText="Отмена" confirmButtonText="Добавить" @confirm="addCategory">

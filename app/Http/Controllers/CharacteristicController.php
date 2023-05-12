@@ -31,10 +31,11 @@ class CharacteristicController extends Controller
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'title' => ['required'],
+            'title' => ['required', 'unique:characteristics'],
             'categories' => ['required'],
         ], [
             'title.required' => '*Заполните это поле',
+            'title.unique' => '*Такая характеристика уже существует',
             'categories.required' => '*Выберите хотя бы одно направление',
         ]);
 
@@ -72,10 +73,11 @@ class CharacteristicController extends Controller
     public function update(Request $request, Characteristic $characteristic)
     {
         $validation = Validator::make($request->all(), [
-            'title' => ['required'],
+            'title' => ['required', 'unique:characteristics,title,' . $characteristic->id],
             'categories' => ['required_if:isEditingCategories,true']
         ], [
             'title.required' => '*Заполните это поле',
+            'title.unique' => '*Такая характеристика уже существует',
             'categories.required_if' => '*Выберите хотя бы одно направление',
         ]);
 
