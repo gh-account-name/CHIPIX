@@ -30,11 +30,34 @@
             </form>
         </Modal>
 
-        <SortFilter :data="products" :searchKeys="['title', 'id']" :sortKeys="{ title: 'Название' }" :reverseButton="true" class="mt-3 mt-md-5">
+        <!-- <SortFilter :data="products" :searchKeys="['title', 'id']" :sortKeys="{ title: 'Название' }" :reverseButton="true" class="mt-3 mt-md-5">
             <template v-slot="{ processedData }">
                 <ListingTable ref="listingTable" class="mt-5"
                     :columns="[['Изображение', 'previewImage', 'img'], ['Название', 'title'], ['Категория', 'category.title'], ['Направления', 'directions.title']]"
                     :data="processedData" :isLoading="isLoading && isFirstLoading" @edit-item="openEditModal" @delete-item="openDeleteModal" />
+            </template>
+        </SortFilter> -->
+
+        <SortFilter :data="products" :searchKeys="['title', 'id']" :sortKeys="{ title: 'Название' }" :reverseButton="true" class="mt-3 mt-md-5">
+            <template v-slot="{ processedData }">
+                <ListingTable ref="listingTable" class="mt-5"
+                    :columns="[['Изображение', 'previewImage', 'slot'], ['Название', 'title', 'slot'], ['Категория', 'category', 'slot'], ['Направления', 'directions', 'slot']]"
+                    :data="processedData" :isLoading="isLoading && isFirstLoading" @edit-item="openEditModal" @delete-item="openDeleteModal">
+                    <template #previewImage="{ item }">
+                        <td class="col-2 text-center"><img :src="`/storage/${item.previewImage}`" class="img-fluid ListingTable__img" alt="ProductPicture"></td>
+                    </template>
+                    <template #title="{ item }">
+                        <td><a target="_blank" :href="`/product/${item.id}`">{{ item.title }}</a></td>
+                    </template>
+                    <template #category="{ item }">
+                        <td>{{ item.category.title }}</td>
+                    </template>
+                    <template #directions="{ item }">
+                        <td>
+                            <p class="mb-1" v-for="direction in item.directions">{{ direction.title }}</p>
+                        </td>
+                    </template>
+                </ListingTable>
             </template>
         </SortFilter>
 
@@ -55,7 +78,7 @@
                     <InputV type="file" multiple name="images[]" id="EditFormImages" labelText="Добавить другие изображения товара" wrapperClasses="mt-3" :errors="ImagesErrors" />
 
                     <div class="row row-cols-3 mx-0 mt-3" v-if="selectedItem?.images">
-                        <div class="col px-4 position-relative" v-for="image in selectedItem.images">
+                        <div class="col px-4 position-relative" v-for="    image     in     selectedItem.images    ">
                             <button @click="deleteImage(image.id)" type="button" class="btn-close rounded-0 position-absolute end-0 top-0" title="Удалить изображение"></button>
                             <img :src="`/storage/${image.src}`" alt="product picture" class="img-fluid">
                         </div>
@@ -69,21 +92,23 @@
                 <div v-if="editingCategories">
                     <div class="mt-3 fw-bold">Выберите категорию:</div>
                     <span class="text-danger" v-if="errors.category_id">{{ errors.category_id[0] }}</span>
-                    <CheckboxV v-for="category in categories" type="radio" class="rounded-circle" name="category_id" :value="category.id" :id="`EditFormCategory${category.id}`"
-                        :labelText="category.title" @click="selectCategory(category)" :checked="editingCategories && category.id == selectedCategory.id" />
+                    <CheckboxV v-for="    category     in     categories    " type="radio" class="rounded-circle" name="category_id" :value="category.id"
+                        :id="`EditFormCategory${category.id}`" :labelText="category.title" @click="selectCategory(category)"
+                        :checked="editingCategories && category.id == selectedCategory.id" />
 
                     <div v-if="selectedCategory">
                         <div class="mt-3 fw-bold" title="Доступные направления зависят от выбранной категории">Добавить товар в направления:</div>
                         <span class="text-danger" v-if="errors.directions">{{ errors.directions[0] }}</span>
-                        <CheckboxV v-for="direction in selectedCategory.directions" :labelText="direction.title" :value="direction.id" name="directions[]"
+                        <CheckboxV v-for="    direction     in     selectedCategory.directions    " :labelText="direction.title" :value="direction.id" name="directions[]"
                             :id="`EditFormDirection${direction.id}`" wrapperClasses="mt-3" :checked="isInDirection(direction.id)" />
                     </div>
                 </div>
 
                 <div v-if="selectedCategory">
                     <div class="mt-3 fw-bold">Изменить характеристики:</div>
-                    <InputV v-for="(characteristic, index) in characteristicsValues" :labelText="characteristic.title" :id="`EditFormCharacteristic${characteristic.id}`"
-                        name="charsValues[]" wrapperClasses="mt-3" v-model="characteristic.value" :errors="errors[`characteristicsValues.${index}`]" />
+                    <InputV v-for="(    characteristic, index    ) in     characteristicsValues    " :labelText="characteristic.title"
+                        :id="`EditFormCharacteristic${characteristic.id}`" name="charsValues[]" wrapperClasses="mt-3" v-model="characteristic.value"
+                        :errors="errors[`characteristicsValues.${index}`]" />
                 </div>
             </form>
         </Modal>
@@ -102,6 +127,7 @@ import Message from '../components/Message.vue';
 import ListingTable from '../components/ListingTable.vue';
 import SortFilter from '../components/SortFilter.vue';
 import TextareaV from '../components/TextareaV.vue';
+
 
 
 export default {
@@ -349,3 +375,9 @@ export default {
 
 };
 </script>
+
+<style>
+.ListingTable__img {
+    max-height: 10rem;
+}
+</style>

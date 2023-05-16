@@ -29,12 +29,8 @@
                     <th class="ListingTable__row-number" scope="row">{{ index + 1 }}</th>
 
                     <template v-for="column in columns" :key="column[0]">
-                        <td v-if="column[1].includes('.')">
-                            <p v-if="Array.isArray(extractValues(item, column[1]))" class="mb-1" v-for="val in extractValues(item, column[1])">{{ val }}</p>
-                            <p v-else>{{ extractValues(item, column[1]) }}</p>
-                        </td>
-                        <td v-else-if="column[2] == 'img'" class="col-2 ListingTable__img-container"><img class="ListingTable__img img-fluid" :src="'/storage/' + item[column[1]]"
-                                alt="picture"></td>
+                        <slot v-if="column[2] == 'slot'" :name="column[1]" :item="item"></slot>
+
                         <td v-else>{{ item[column[1]] }}</td>
                     </template>
 
@@ -50,8 +46,6 @@
 </template>
 
 <script>
-import Modal from './Modal.vue';
-
 export default {
     props: {
         columns: {
@@ -78,23 +72,8 @@ export default {
             // вызов функции удаления элемента
             this.$emit("delete-item", item);
         },
-
-        extractValues(obj, key) {
-            const keys = key.split('.');
-            let value = obj;
-
-            for (const nestedKey of keys) {
-                if (Array.isArray(value)) {
-                    value = value.map((item) => item[nestedKey]);
-                } else {
-                    value = value[nestedKey];
-                }
-            }
-
-            return value || [];
-        }
     },
-    components: { Modal }
+
 };
 </script>
 
@@ -110,13 +89,5 @@ export default {
 
 .ListingTable__row-number {
     width: 1%;
-}
-
-.ListingTable__img {
-    max-height: 10rem;
-}
-
-.ListingTable__img-container {
-    text-align: center;
 }
 </style>

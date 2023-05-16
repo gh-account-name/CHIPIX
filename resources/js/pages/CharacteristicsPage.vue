@@ -15,8 +15,14 @@
 
         <SortFilter :data="characteristics" :searchKeys="['title', 'id']" :sortKeys="{ title: 'Название' }" :reverseButton="true" class="mt-3 mt-md-5">
             <template v-slot="{ processedData }">
-                <ListingTable ref="listingTable" class="mt-5" :columns="[['Название', 'title'], ['В категориях', 'categories.title']]" :data="processedData"
-                    :isLoading="isLoading && isFirstLoading" @edit-item="openEditModal" @delete-item="openDeleteModal" />
+                <ListingTable ref="listingTable" class="mt-5" :columns="[['Название', 'title'], ['В категориях', 'categories', 'slot']]" :data="processedData"
+                    :isLoading="isLoading && isFirstLoading" @edit-item="openEditModal" @delete-item="openDeleteModal">
+                    <template #categories="{ item }">
+                        <td>
+                            <p class="mb-1" v-for="category in item.categories">{{ category.title }}</p>
+                        </td>
+                    </template>
+                </ListingTable>
             </template>
         </SortFilter>
 

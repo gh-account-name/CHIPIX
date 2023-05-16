@@ -1,16 +1,16 @@
 <header>
     <div id="headerInfo" class="d-flex align-content-center bg-main-gray800">
         <div class="container d-flex justify-content-between fs-14">
-            <a href="#" class="text-main-white text-decoration-none d-flex justify-content-between align-items-center">
+            <span class="text-main-white text-decoration-none d-flex justify-content-between align-items-center">
                 <img src="{{asset('img/mapPoint.svg')}}" alt="mapPoint" class="me-2">
                 <p class="d-inline m-0">603105, Нижний Новгород, ул. Салганская, 30</p>
-            </a>
+            </span>
 
             <div class="d-flex">
-                <a href="#" class="text-main-white text-decoration-none d-flex justify-content-between align-items-center">
+                <span class="text-main-white text-decoration-none d-flex justify-content-between align-items-center">
                     <img src="{{asset('img/phone.svg')}}" alt="mapPoint" class="me-2">
                     <p class="d-inline m-0">+7 (831) 224-86-51</p>
-                </a>
+                </span>
 
                 <a href="mailto:chipix@ustnn.net" class="text-main-white text-decoration-none ms-4 d-flex justify-content-between align-items-center">
                     <img src="{{asset('img/mail.svg')}}" alt="mapPoint" class="me-2">

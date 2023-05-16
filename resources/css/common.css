@@ -118,10 +118,6 @@
     border-color: var(--main-dark-color);
 }
 
-a:hover {
-    color: var(--main-white-color);
-}
-
 html,
 body {
     height: 100%;
