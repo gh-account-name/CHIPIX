@@ -30,14 +30,6 @@
             </form>
         </Modal>
 
-        <!-- <SortFilter :data="products" :searchKeys="['title', 'id']" :sortKeys="{ title: 'Название' }" :reverseButton="true" class="mt-3 mt-md-5">
-            <template v-slot="{ processedData }">
-                <ListingTable ref="listingTable" class="mt-5"
-                    :columns="[['Изображение', 'previewImage', 'img'], ['Название', 'title'], ['Категория', 'category.title'], ['Направления', 'directions.title']]"
-                    :data="processedData" :isLoading="isLoading && isFirstLoading" @edit-item="openEditModal" @delete-item="openDeleteModal" />
-            </template>
-        </SortFilter> -->
-
         <SortFilter :data="products" :searchKeys="['title', 'id']" :sortKeys="{ title: 'Название' }" :reverseButton="true" class="mt-3 mt-md-5">
             <template v-slot="{ processedData }">
                 <ListingTable ref="listingTable" class="mt-5"
