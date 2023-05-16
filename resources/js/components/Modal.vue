@@ -5,7 +5,7 @@
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" :id="id" :ref="id" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal fade Modal__modal" :id="id" :ref="id" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style>
-.btn-close:focus {
+.Modal__modal .btn-close:focus {
     box-shadow: 0 0 0 2px rgba(66, 70, 73, 1);
 }
 </style>

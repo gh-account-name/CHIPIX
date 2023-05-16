@@ -4,7 +4,7 @@
 
         <textarea v-bind="$attrs" :class="[errors ? 'is-invalid' : '', 'form-control', 'input-main']"></textarea>
 
-        <div v-if="errors" class="invalid-feedback" v-for=" error   in   errors ">
+        <div v-if="errors" class="invalid-feedback" v-for="error in errors">
             {{ error }}
         </div>
     </div>

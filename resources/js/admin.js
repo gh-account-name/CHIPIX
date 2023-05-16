@@ -1,6 +1,7 @@
 import { createApp } from 'vue/dist/vue.esm-bundler';
 import CategoriesPage from './pages/CategoriesPage.vue';
 import CharacteristicsPage from './pages/CharacteristicsPage.vue';
+import ProductsPage from './pages/ProductsPage.vue';
 
 // createApp(CategoriesPage).mount('#categoriesPage');
 
@@ -29,6 +30,8 @@ function getPageComponent(page) {
             return CategoriesPage;
         case 'characteristics':
             return CharacteristicsPage;
+        case 'products':
+            return ProductsPage;
         default:
             return null;
     }

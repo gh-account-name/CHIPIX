@@ -1,7 +1,7 @@
 <template>
-    <button :disabled="isLoading" class="buttonV">
+    <button :disabled="isLoading" class="ButtonV">
         <span :class="{ 'opacity-0': isLoading }">{{ text }}</span>
-        <div v-if="isLoading" class="loading-overlay">
+        <div v-if="isLoading" class="ButtonV__loading-overlay">
             <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
             Загрузка...
         </div>
@@ -13,7 +13,7 @@ export default {
     props: {
         text: String,
     },
-    // Управление состоянием "загружается/не загружается" осуществляется через корневой элемент т.е. на самом верху
+    // Управление состоянием "загружается/не загружается" осуществляется через корневой компонент т.е. на самом верху
     computed: {
         isLoading() {
             return this.$root.isLoading;
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style>
-.loading-overlay {
+.ButtonV__loading-overlay {
     font-size: 80%;
     transform: translateY(-50%);
     position: absolute;
@@ -36,7 +36,7 @@ export default {
     align-items: center;
 }
 
-.buttonV {
+.ButtonV {
     position: relative;
 }
 </style>

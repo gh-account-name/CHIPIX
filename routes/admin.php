@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CharacteristicController;
 use App\Http\Controllers\DirectionController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/categories', 'categoriesPage')->name('categoriesPage');
 
         Route::get('/characteristics', 'characteristicsPage')->name('characteristicsPage');
+
+        Route::get('/products', 'productsPage')->name('productsPage');
     });
 
 
@@ -58,5 +61,19 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/update/characteristic/{characteristic?}', 'update')->name('updateCharacteristic');
 
         Route::post('/delete/characteristic/{characteristic?}', 'destroy')->name('deleteCharacteristic');
+    });
+
+
+    Route::controller(ProductController::class)->group(function () {
+
+        Route::get('/get/product', 'get')->name('getProducts');
+
+        Route::post('/add/product', 'store')->name('addProduct');
+
+        Route::post('/update/product/{product?}', 'update')->name('updateProduct');
+
+        Route::post('/delete/product/{product?}', 'destroy')->name('deleteProduct');
+
+        Route::post('/delete/product/image/{image?}', 'deleteimage')->name('deleteProductImage');
     });
 });

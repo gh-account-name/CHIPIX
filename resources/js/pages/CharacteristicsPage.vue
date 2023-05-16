@@ -31,7 +31,7 @@
                 <div v-if="editingCategories">
                     <div class="mt-3 fw-bold">Присутствует у следующих категорий товаров:</div>
                     <span class="text-danger" v-if="errors.categories">{{ errors.categories[0] }}</span>
-                    <CheckboxV v-for="category in categories" :labelText="category.title" :value="category.id" name="categories[]" :id="`editedCategory${category.id}`"
+                    <CheckboxV v-for="category in categories" :labelText="category.title" :value="category.id" name="categories[]" :id="`EditFormCategory${category.id}`"
                         wrapperClasses="mt-3" :checked="isInCategory(category, selectedItem?.id)" />
                 </div>
             </form>
@@ -101,10 +101,12 @@ export default {
                 this.getCategories();
 
             } catch (error) {
-                this.errors = error.response.data;
-                setTimeout(() => {
-                    this.errors = [];
-                }, 3000);
+                if (error.response.status == 422) {
+                    this.errors = error.response.data;
+                    setTimeout(() => {
+                        this.errors = [];
+                    }, 3000);
+                }
                 console.error(error);
             }
 
@@ -136,10 +138,12 @@ export default {
                     this.getCategories();
 
                 } catch (error) {
-                    this.errors = error.response.data;
-                    setTimeout(() => {
-                        this.errors = [];
-                    }, 3000);
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data;
+                        setTimeout(() => {
+                            this.errors = [];
+                        }, 3000);
+                    }
                     console.error(error);
                 }
 

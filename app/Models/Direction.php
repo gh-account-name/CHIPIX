@@ -13,4 +13,9 @@ class Direction extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

@@ -32,7 +32,7 @@
                 <div v-if="editingDirections">
                     <div class="mt-3 fw-bold">Добавить категорию в:</div>
                     <span class="text-danger" v-if="errors.directions">{{ errors.directions[0] }}</span>
-                    <CheckboxV v-for="direction in directions" :labelText="direction.title" :value="direction.id" name="directions[]" :id="`editedDirection${direction.id}`"
+                    <CheckboxV v-for="direction in directions" :labelText="direction.title" :value="direction.id" name="directions[]" :id="`EditFormDirection${direction.id}`"
                         wrapperClasses="mt-3" :checked="isInDirection(direction, selectedItem?.id)" />
                 </div>
             </form>
@@ -101,10 +101,12 @@ export default {
                 this.getDirections();
 
             } catch (error) {
-                this.errors = error.response.data;
-                setTimeout(() => {
-                    this.errors = [];
-                }, 3000);
+                if (error.response.status == 422) {
+                    this.errors = error.response.data;
+                    setTimeout(() => {
+                        this.errors = [];
+                    }, 3000);
+                }
                 console.error(error);
             }
 
@@ -136,10 +138,12 @@ export default {
                     this.getDirections();
 
                 } catch (error) {
-                    this.errors = error.response.data;
-                    setTimeout(() => {
-                        this.errors = [];
-                    }, 3000);
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data;
+                        setTimeout(() => {
+                            this.errors = [];
+                        }, 3000);
+                    }
                     console.error(error);
                 }
 

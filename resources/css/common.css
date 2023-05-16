@@ -102,7 +102,9 @@
 }
 
 .input-main[type=checkbox],
-.input-main[type=checkbox]~.form-label {
+.input-main[type=checkbox]~.form-label,
+.input-main[type=radio],
+.input-main[type=radio]~.form-label {
     cursor: pointer;
 }
 
@@ -111,6 +113,10 @@
     box-shadow: none;
 }
 
+.form-check-input:checked {
+    background-color: var(--main-dark-color);
+    border-color: var(--main-dark-color);
+}
 
 a:hover {
     color: var(--main-white-color);

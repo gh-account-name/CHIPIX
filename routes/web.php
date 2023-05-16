@@ -14,12 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(PageController::class)->group(function() {
+Route::controller(PageController::class)->group(function () {
 
     Route::get('/', 'mainPage')->name('mainPage');
 
-    Route::get('/catalog', 'catalogPage')->name('catalogPage');
+    Route::get('/catalog/{direction}/{category}', 'catalogPage')->name('catalogPage');
 
-    Route::get('/product', 'productPage')->name('productPage');
+    Route::get('/product/{product?}', 'productPage')->name('productPage');
 });
-

@@ -1,9 +1,9 @@
 <template>
     <div class="tableWrapper table-responsive">
-        <table class="table table-hover table-responsive">
+        <table class="table table-hover table-responsive ListingTable__table">
             <thead class="bg-main-dark text-main-white">
                 <tr>
-                    <th class="col-1" scope="col">#</th>
+                    <th class="ListingTable__row-number" scope="col">#</th>
 
                     <th v-for="column in columns" :key="column[0]">{{ column[0] }}</th>
 
@@ -13,7 +13,7 @@
             <tbody>
                 <!-- Скелетики 💀💀 -->
                 <tr v-if="isLoading" v-for="index in 3">
-                    <th class="col-1 placeholder-glow" scope="row"><span class="placeholder col-12"></span></th>
+                    <th class="ListingTable__row-number placeholder-glow" scope="row"><span class="placeholder col-12"></span></th>
 
                     <template v-for="column in columns" :key="column[0]">
                         <td class="placeholder-glow"><span class="placeholder col-12"></span></td>
@@ -26,12 +26,15 @@
                 </tr>
 
                 <tr v-else v-for="(item, index) in data" :key="item.id">
-                    <th class="col-1" scope="row">{{ index + 1 }}</th>
+                    <th class="ListingTable__row-number" scope="row">{{ index + 1 }}</th>
 
                     <template v-for="column in columns" :key="column[0]">
                         <td v-if="column[1].includes('.')">
-                            <p class="mb-1" v-for="val in extractValues(item, column[1])">{{ val }}</p>
+                            <p v-if="Array.isArray(extractValues(item, column[1]))" class="mb-1" v-for="val in extractValues(item, column[1])">{{ val }}</p>
+                            <p v-else>{{ extractValues(item, column[1]) }}</p>
                         </td>
+                        <td v-else-if="column[2] == 'img'" class="col-2 ListingTable__img-container"><img class="ListingTable__img img-fluid" :src="'/storage/' + item[column[1]]"
+                                alt="picture"></td>
                         <td v-else>{{ item[column[1]] }}</td>
                     </template>
 
@@ -96,12 +99,24 @@ export default {
 </script>
 
 <style>
-.placeholder {
+.ListingTable__table .placeholder {
     vertical-align: top;
 }
 
-button.placeholder {
+.ListingTable__table button.placeholder {
     background-color: currentColor !important;
     pointer-events: none;
+}
+
+.ListingTable__row-number {
+    width: 1%;
+}
+
+.ListingTable__img {
+    max-height: 10rem;
+}
+
+.ListingTable__img-container {
+    text-align: center;
 }
 </style>

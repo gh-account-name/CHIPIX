@@ -21,4 +21,9 @@ class PageController extends Controller
     {
         return view('admin.characteristics');
     }
+
+    public function productsPage()
+    {
+        return view('admin.products');
+    }
 }

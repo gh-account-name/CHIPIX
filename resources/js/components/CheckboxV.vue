@@ -5,7 +5,7 @@
 
         <label v-if="labelText" :class="[errors ? 'is-invalid' : '', 'form-label m-0', labelClasses]" :for="$attrs.id">{{ labelText }}</label>
 
-        <div v-if="errors" class="invalid-feedback m-0" v-for=" error   in   errors ">
+        <div v-if="errors" class="invalid-feedback m-0" v-for="error in errors">
             {{ error }}
         </div>
     </div>

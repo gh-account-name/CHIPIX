@@ -31,13 +31,13 @@
 
                     @auth('admin')
                     <li class="nav-item dropdown">
-                        <a class="nav-link text-main-white fs-18" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="nav-link text-main-white fs-18" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Админ
-                        </a>
+                        </span>
                         <ul class="dropdown-menu rounded-0">
                             <li><a class="dropdown-item" href="{{route('admin-categoriesPage')}}">Категории</a></li>
                             <li><a class="dropdown-item" href="{{route('admin-characteristicsPage')}}">Характеристики</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="{{route('admin-productsPage')}}">Продукты</a></li>
                         </ul>
                     </li>
                     @endauth
@@ -48,12 +48,12 @@
 
                     @foreach ($directions as $direction)
                     <li class="nav-item dropdown">
-                        <a class="nav-link text-main-white fs-18" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="nav-link text-main-white fs-18" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{$direction->title}}
-                        </a>
+                        </span>
                         <ul class="dropdown-menu rounded-0">
                             @foreach ($direction->categories as $category)
-                            <li><a class="dropdown-item" href="{{route('catalogPage')}}">{{$category->title}}</a>
+                            <li><a class="dropdown-item" href="{{route('catalogPage', ['direction'=>$direction, 'category'=>$category])}}">{{$category->title}}</a>
                             </li>
                             @endforeach
                         </ul>
