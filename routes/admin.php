@@ -46,9 +46,9 @@ Route::middleware('auth:admin')->group(function () {
 
         Route::post('/add/category', 'store')->name('addCategory');
 
-        Route::post('/update/category/{category?}', 'update')->name('updateCategory');
+        Route::post('/update/category/{category}', 'update')->name('updateCategory');
 
-        Route::post('/delete/category/{category?}', 'destroy')->name('deleteCategory');
+        Route::post('/delete/category/{category}', 'destroy')->name('deleteCategory');
     });
 
 
@@ -58,9 +58,9 @@ Route::middleware('auth:admin')->group(function () {
 
         Route::post('/add/characteristic', 'store')->name('addCharacteristic');
 
-        Route::post('/update/characteristic/{characteristic?}', 'update')->name('updateCharacteristic');
+        Route::post('/update/characteristic/{characteristic}', 'update')->name('updateCharacteristic');
 
-        Route::post('/delete/characteristic/{characteristic?}', 'destroy')->name('deleteCharacteristic');
+        Route::post('/delete/characteristic/{characteristic}', 'destroy')->name('deleteCharacteristic');
     });
 
 
@@ -70,10 +70,10 @@ Route::middleware('auth:admin')->group(function () {
 
         Route::post('/add/product', 'store')->name('addProduct');
 
-        Route::post('/update/product/{product?}', 'update')->name('updateProduct');
+        Route::post('/update/product/{product}', 'update')->name('updateProduct');
 
-        Route::post('/delete/product/{product?}', 'destroy')->name('deleteProduct');
+        Route::post('/delete/product/{product}', 'destroy')->name('deleteProduct');
 
-        Route::post('/delete/product/image/{image?}', 'deleteimage')->name('deleteProductImage');
+        Route::post('/delete/product/image/{image}', 'deleteimage')->name('deleteProductImage');
     });
 });

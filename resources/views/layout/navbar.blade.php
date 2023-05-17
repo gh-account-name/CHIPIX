@@ -23,7 +23,7 @@
     <nav class="navbar navbar-dark navbar-expand-lg bg-main-dark">
         <div class="container-fluid container">
             <a class="navbar-brand p-0 m-0" href="{{route('mainPage')}}"><img src="{{asset('img/logo.svg')}}" id="logo" alt="log"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end mt-4 mt-lg-0" id="navbarSupportedContent">
@@ -31,10 +31,10 @@
 
                     @auth('admin')
                     <li class="nav-item dropdown">
-                        <span class="nav-link text-main-white fs-18" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="nav-link dropdown-toggle text-main-white fs-18" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Админ
                         </span>
-                        <ul class="dropdown-menu rounded-0">
+                        <ul class="dropdown-menu rounded-0 m-0">
                             <li><a class="dropdown-item" href="{{route('admin-categoriesPage')}}">Категории</a></li>
                             <li><a class="dropdown-item" href="{{route('admin-characteristicsPage')}}">Характеристики</a></li>
                             <li><a class="dropdown-item" href="{{route('admin-productsPage')}}">Продукты</a></li>
@@ -51,10 +51,9 @@
                         <span class="nav-link text-main-white fs-18" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{$direction->title}}
                         </span>
-                        <ul class="dropdown-menu rounded-0">
+                        <ul class="dropdown-menu rounded-0 m-0">
                             @foreach ($direction->categories as $category)
-                            <li><a class="dropdown-item" href="{{route('catalogPage', ['direction'=>$direction, 'category'=>$category])}}">{{$category->title}}</a>
-                            </li>
+                            <li><a class="dropdown-item" href="{{route('catalogPage', ['category'=>$category, 'direction'=>$direction])}}">{{$category->title}}</a></li>
                             @endforeach
                         </ul>
                     </li>
@@ -71,7 +70,7 @@
                     @endauth
                 </ul>
 
-                <div id="headerInfoColapsed" class="bg-main-gray800 rounded-2 mt-3">
+                <div id="headerInfoColapsed" class="bg-main-gray800 rounded-0 mt-3">
                     <div class="container d-flex flex-column fs-18">
                         <a href="#" class="text-main-white text-decoration-none d-flex align-items-center py-2">
                             <img src="{{asset('img/mapPoint.svg')}}" alt="mapPoint" class="me-2">

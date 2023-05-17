@@ -11,22 +11,25 @@
 
 @section('main')
 <div class="sectionTitle bg-main-dark py-3 my-5">
-    <h1 class="h2 text-main-white text-center fw-normal m-0">{{$product->title}}</h1>
+    <h1 class="h2 text-main-white text-center fw-normal m-0 px-3">{{$product->title}}</h1>
 </div>
 
 <div class="container">
     <div class="d-flex flex-column flex-lg-row justify-content-lg-between">
         <div class="col-lg-5 mb-5">
             <div id="productImages">
-                <img src="{{asset('/storage/' . $product->previewImage)}}" alt="product" class="img-fluid">
-                <div class="row row-cols-5 gy-4 mt-4">
-                    <div class="col">
-                        <img src="{{asset('/storage/' . $product->previewImage)}}" alt="product" class="img-fluid">
+                <div class="productImages__displaying-img-container">
+                    <img src="{{asset('/storage/' . $product->previewImage)}}" alt="product" class="img-fluid" id="displayingImg">
+                </div>
+
+                <div class="row row-cols-5 gy-4 mt-4" id="imagesList">
+                    <div class="col text-center">
+                        <img src="{{asset('/storage/' . $product->previewImage)}}" alt="product" role="button" class="img-fluid imagesList__img imagesList__active-image">
                     </div>
 
                     @foreach ($product->images as $image)
-                    <div class="col">
-                        <img src="{{asset('/storage/' . $image->src)}}" alt="product" class="img-fluid opacity-50">
+                    <div class="col text-center">
+                        <img src="{{asset('/storage/' . $image->src)}}" alt="product" role="button" class="img-fluid imagesList__img">
                     </div>
                     @endforeach
 
@@ -57,14 +60,6 @@
                 <pre class="fs-18">
 &#8203;{{$product->additional_info}}
                 {{-- Этот текст намеренно прижат к началу т.к. расположен в pre  --}}
-
-
-                {{-- Обращаем Ваше внимание,что согласно ISO-9241-302,303,305,307:2008, используемая панель (матрица) 2-го класса может иметь следующее количество проблемных пикселей (не является дефектом):
--2 полностью светлых
--2 полностью тёмных
--5-10 единичных или двойных светлых или тёмных субпикселя (зависит от числа каждого. Разрешено не более 5 ярких ("белых") субпикселей).
-
-* Конфигурация типовых моделей может быть изменена Компанией в одностороннем порядке --}}
                 </pre>
             </div>
             @endif
@@ -72,4 +67,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    const images = document.querySelectorAll('.imagesList__img');
+    const displayingImage = document.getElementById('displayingImg');
+
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            if (!image.classList.contains('imagesList__active-image')) {
+                const activeImage = document.querySelector('.imagesList__active-image');
+                image.classList.add('imagesList__active-image');
+                displayingImage.src = image.src;
+                activeImage.classList.remove('imagesList__active-image');
+            }
+        })
+    });
+
+</script>
 @endsection

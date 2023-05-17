@@ -6,7 +6,7 @@
 
 @section('main')
 <div class="sectionTitle bg-main-dark py-3 my-5">
-    <h2 class="text-main-white text-center fw-normal m-0">{{$category->title}}</h2>
+    <h2 class="text-main-white text-center fw-normal m-0 px-3">{{$category->title}}</h2>
 </div>
 
 <div class="container pb-5">

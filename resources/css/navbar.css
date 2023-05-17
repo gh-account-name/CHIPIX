@@ -26,6 +26,12 @@ header .nav-item:last-child>.nav-link {
     padding-right: 0 !important;
 }
 
+header .dropdown-item:active {
+    color: var(--main-white-color);
+    text-decoration: none;
+    background-color: var(--main-dark-color);
+}
+
 @media (max-width: 1200px) {
     .nav-link {
         font-size: var(--fs-14) !important;

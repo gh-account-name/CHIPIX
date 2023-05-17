@@ -28,7 +28,8 @@ CHIPIX
                         <h2 class="fs-48 mb-4">Персональные компьютеры CHIPIX</h2>
                         <p class="fs-24 mb-4 fw-bold d-none d-lg-block">Производительность и надёжность для вашего рабочего процесса</p>
                         <p class="fs-24 mb-5 d-none d-lg-block">Уникальные персональные решения для любых сложных задач</p>
-                        <a href="#" class="btn btn-main-dark btn-main-big">Все ПК</a>
+                        {{-- Подставить в ['category'=>'X'] id нужной категории из БД вместо 'X' --}}
+                        <a href="{{route('catalogPage', ['category'=>'X'])}}" class="btn btn-main-dark btn-main-big">Все ПК</a>
                     </div>
                     <div class="slide-img col-lg-7 h-100">
                         <img src="{{asset('img/slide1img.png')}}" alt="pc" class="h-100 w-100">
@@ -41,7 +42,8 @@ CHIPIX
                         <h2 class="fs-48 mb-4">Мониторы CHIPIX</h2>
                         <p class="fs-24 mb-4 fw-bold d-none d-lg-block">Превосходная эргономичность и простота в использовании</p>
                         <p class="fs-24 mb-5 d-none d-lg-block">Выбор для офиса и дома</p>
-                        <a href="#" class="btn btn-main-dark btn-main-big">Все мониторы</a>
+                        {{-- Подставить в ['category'=>'X'] id нужной категории из БД вместо 'X' --}}
+                        <a href="{{route('catalogPage', ['category'=>'X'])}}" class="btn btn-main-dark btn-main-big">Все мониторы</a>
                     </div>
                     <div class="slide-img col-lg-6 h-100">
                         <img src="{{asset('img/slide2img.png')}}" alt="monitor" class="h-100 w-100">
@@ -53,7 +55,8 @@ CHIPIX
                     <div class="slide-text text-main-white col-lg-5 mt-4 mt-lg-0">
                         <h2 class="fs-48 mb-4">Моноблоки CHIPIX</h2>
                         <p class="fs-24 mb-4 fw-bold d-none d-lg-block">Эталон универсальности и многофункциональности</p>
-                        <a href="#" class="btn btn-main-dark btn-main-big">Все моноблоки</a>
+                        {{-- Подставить в ['category'=>'X'] id нужной категории из БД вместо 'X' --}}
+                        <a href="{{route('catalogPage', ['category'=>'X'])}}" class="btn btn-main-dark btn-main-big">Все моноблоки</a>
                     </div>
                     <div class="slide-img col-lg-7 h-100">
                         <img src="{{asset('img/slide3img.png')}}" alt="monoblock" class="h-100 w-100">
@@ -86,7 +89,7 @@ CHIPIX
 {{-- О нас --}}
 <div id="aboutUsSection">
     <div class="sectionTitle bg-main-dark py-3 my-5">
-        <h2 class="text-main-white text-center fw-normal m-0">О нас</h2>
+        <h2 class="text-main-white text-center fw-normal m-0 px-3">О нас</h2>
     </div>
 
     <div class="container">

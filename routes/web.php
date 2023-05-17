@@ -18,7 +18,7 @@ Route::controller(PageController::class)->group(function () {
 
     Route::get('/', 'mainPage')->name('mainPage');
 
-    Route::get('/catalog/{direction}/{category}', 'catalogPage')->name('catalogPage');
+    Route::get('/catalog/{category}/{direction?}', 'catalogPage')->name('catalogPage');
 
     Route::get('/product/{product?}', 'productPage')->name('productPage');
 });

@@ -10,3 +10,38 @@ pre {
     color: var(--main-dark-color);
     font-family: var(--bs-body-font-family);
 }
+
+.imagesList__img {
+    opacity: 50%;
+    max-height: 100px;
+}
+
+.imagesList__active-image {
+    opacity: 1;
+}
+
+.productImages__displaying-img-container {
+    height: 400px;
+    text-align: center;
+}
+
+#displayingImg {
+    max-height: 100%;
+}
+
+@media (max-width: 1199px) {
+
+    .imagesList__img {
+        max-height: 70px;
+    }
+}
+
+@media (max-width: 575px) {
+    .productImages__displaying-img-container {
+        height: 250px;
+    }
+
+    .imagesList__img {
+        max-height: 50px;
+    }
+}

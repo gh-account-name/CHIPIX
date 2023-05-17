@@ -86,10 +86,3 @@
         font-size: var(--fs-24);
     }
 }
-
-/* @media (max-width: 575px) {
-    #platesBlock img {
-        height: auto;
-        width: 70%;
-    }
-} */
