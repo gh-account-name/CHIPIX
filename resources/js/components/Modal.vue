@@ -54,7 +54,7 @@ export default {
         closeButtonText: String,
         confirmButtonText: String,
     },
-    emits: ['confirm'],
+    emits: ['confirm', 'onClose'],
     methods: {
         open() {
             this.modal.show();
@@ -65,12 +65,20 @@ export default {
         // вызов функции при нажатии на кнопку подтверждения
         confirm() {
             this.$emit('confirm');
+        },
+        // вызов функции при закрытии модального окна
+        onClose() {
+            this.$emit('onClose');
         }
 
     },
     components: { ButtonV },
     mounted() {
         this.modal = new bootstrap.Modal(this.$refs[this.id]);
+
+        document.getElementById(this.id).addEventListener('hidden.bs.modal', () => {
+            this.onClose();
+        })
     }
 }
 </script>

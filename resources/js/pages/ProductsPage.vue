@@ -54,7 +54,7 @@
         </SortFilter>
 
         <Modal ref="editModal" id="editModal" :titleText='`Редактировать товар "${selectedItem?.title}"`' closeButtonText="Отмена" confirmButtonText="Редактировать" type="warning"
-            @confirm="editItem">
+            @confirm="editItem" @onClose="onCloseEditDeleteModal">
             <form id="editForm" ref="editForm">
                 <InputV name="title" id="title" placeholder="Название" :value="selectedItem?.title" :errors="errors.title" />
                 <TextareaV name="description" id="description" placeholder="Описание" wrapperClasses="mt-3" :value="selectedItem?.description" :errors="errors.description" />
@@ -106,7 +106,7 @@
         </Modal>
 
         <Modal ref="deleteModal" id="deleteModal" :titleText='`Подтвердите удаление товара "${selectedItem?.title}"`' closeButtonText="Отмена" confirmButtonText="Удалить" type="danger"
-            @confirm="deleteItem" />
+            @confirm="deleteItem" @onClose="onCloseEditDeleteModal" />
     </div>
 </template>
 
@@ -202,10 +202,6 @@ export default {
                     this.$refs.editModal.close();
 
                     this.$refs.editForm.reset();
-                    this.selectedItem = null;
-                    this.selectedCategory = null;
-                    this.editingCategories = false;
-                    this.editingPictures = false;
 
                     this.messageType = 'warning';
                     this.message = response.data;
@@ -240,8 +236,6 @@ export default {
                     const response = await window.axios.post(`delete/product/${this.selectedItem.id}`);
 
                     this.$refs.deleteModal.close();
-
-                    this.selectedItem = null;
 
                     this.messageType = 'danger';
                     this.message = response.data;
@@ -298,6 +292,13 @@ export default {
         openDeleteModal(item) {
             this.selectedItem = item;
             this.$refs.deleteModal.open();
+        },
+
+        onCloseEditDeleteModal() {
+            this.selectedItem = null;
+            this.selectedCategory = null;
+            this.editingCategories = false;
+            this.editingPictures = false;
         },
 
         isInCategory(category, characteristicId) {

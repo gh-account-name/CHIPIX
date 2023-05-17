@@ -28,7 +28,7 @@
         </SortFilter>
 
         <Modal ref="editModal" id="editModal" :titleText='`Редактировать категорию "${selectedItem?.title}"`' closeButtonText="Отмена" confirmButtonText="Редактировать" type="warning"
-            @confirm="editItem">
+            @confirm="editItem" @onClose="onCloseEditDeleteModal">
             <form id="editForm" ref="editForm">
                 <InputV name="title" id="title" placeholder="Название" :value="selectedItem?.title" :errors="errors.title" />
 
@@ -45,7 +45,7 @@
         </Modal>
 
         <Modal ref="deleteModal" id="deleteModal" :titleText='`Подтвердите удаление категории "${selectedItem?.title}"`' closeButtonText="Отмена" confirmButtonText="Удалить"
-            type="danger" @confirm="deleteItem" />
+            type="danger" @confirm="deleteItem" @onClose="onCloseEditDeleteModal" />
     </div>
 </template>
 
@@ -133,8 +133,6 @@ export default {
                     this.$refs.editModal.close();
 
                     this.$refs.editForm.reset();
-                    this.selectedItem = null;
-                    this.editingDirections = false;
 
                     this.messageType = 'warning';
                     this.message = response.data;
@@ -170,8 +168,6 @@ export default {
 
                     this.$refs.deleteModal.close();
 
-                    this.selectedItem = null;
-
                     this.messageType = 'danger';
                     this.message = response.data;
                     this.$refs.notification.open();
@@ -197,6 +193,11 @@ export default {
         openDeleteModal(item) {
             this.selectedItem = item;
             this.$refs.deleteModal.open();
+        },
+
+        onCloseEditDeleteModal() {
+            this.selectedItem = null;
+            this.editingDirections = false;
         },
 
         isInDirection(direction, categoryId) {
