@@ -1,7 +1,7 @@
 import './bootstrap';
 import { createApp } from 'vue/dist/vue.esm-bundler';
-import TryComp from './components/TryComp.vue';
+import ContactForm from './components/ContactForm.vue';
 
 if (window.location.pathname == '/') {
-    createApp(TryComp).mount('#ContactFormSection');
+    createApp(ContactForm).mount('#ContactFormSection');
 }
