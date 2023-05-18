@@ -59,8 +59,14 @@
                     </li>
                     @endforeach
 
-                    <li class="nav-item">
-                        <a class="nav-link text-main-white fs-18" href="#">Поддержка</a>
+                    <li class="nav-item dropdown">
+                        <span class="nav-link text-main-white fs-18" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Поддержа
+                        </span>
+                        <ul class="dropdown-menu rounded-0 m-0">
+                            <li><a class="dropdown-item" href="#">Гарантийная политика</a></li>
+                            <li><a class="dropdown-item" href="#">Служба гарантии</a></li>
+                        </ul>
                     </li>
 
                     @auth('admin')

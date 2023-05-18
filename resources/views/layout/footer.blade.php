@@ -12,6 +12,8 @@
                 @endforeach
                 <li class="nav-item col-12 col-sm-6 col-lg-3 mt-3">
                     <p class="fw-bold m-0 nav-link text-muted">Поддержка</p>
+                    <a class="nav-link text-muted" href="#"> Гарантийная политика</a>
+                    <a class="nav-link text-muted" href="#">Служба гарантии</a>
                 </li>
                 <li class="nav-item col-12 col-sm-6 col-lg-3 mt-3">
                     <a href="{{route('mainPage')}}#aboutUsSection" class="fw-bold m-0 nav-link text-muted">О компании</a>

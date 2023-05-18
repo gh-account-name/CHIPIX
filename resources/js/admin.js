@@ -3,10 +3,6 @@ import CategoriesPage from './pages/CategoriesPage.vue';
 import CharacteristicsPage from './pages/CharacteristicsPage.vue';
 import ProductsPage from './pages/ProductsPage.vue';
 
-// createApp(CategoriesPage).mount('#categoriesPage');
-
-// createApp(CharacteristicsPage).mount('#characteristicsPage');
-
 const currentPage = getCurrentPage();
 
 const app = createApp(getPageComponent(currentPage));

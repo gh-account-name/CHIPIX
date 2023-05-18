@@ -201,8 +201,8 @@ CHIPIX
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <form class="ps-lg-5">
+            <div class="col" id="ContactFormSection">
+                <form class="ps-lg-5" action="#">
                     <div class="mb-4">
                         <input type="text" class="form-control input-main" id="name" name="name" placeholder="Как к вам обращаться">
                     </div>
@@ -220,12 +220,11 @@ CHIPIX
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-main-dark">Отправить сообщение</button>
+                        <a onclick="alert('Форма в данный момент не доступна')" class="btn btn-main-dark">Отправить сообщение</a>
                     </div>
                 </form>
             </div>
         </div>
-
     </div>
 </div>
 @endsection

@@ -1,93 +1,84 @@
 <template>
-    <div class="tableWrapper table-responsive">
-        <table class="table table-hover table-responsive ListingTable__table">
-            <thead class="bg-main-dark text-main-white">
-                <tr>
-                    <th class="ListingTable__row-number" scope="col">#</th>
+    <Message :text="message" ref="notification" :type="messageType" />
+    <form class="ps-lg-5" ref="form">
+        <InputV name="name" id="name" placeholder="Как к вам обращаться" wrapperClasses="mb-4" :errors="errors.name" />
 
-                    <th v-for="column in columns" :key="column[0]">{{ column[0] }}</th>
+        <InputV name="phone" id="phone" placeholder="Номер телефона" wrapperClasses="mb-4" :errors="errors.phone" />
 
-                    <th class="col-3">Действия</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Скелетики 💀💀 -->
-                <tr v-if="isLoading" v-for="index in 3">
-                    <th class="ListingTable__row-number placeholder-glow" scope="row"><span class="placeholder col-12"></span></th>
+        <InputV name="email" id="email" placeholder="Email" wrapperClasses="mb-4" :errors="errors.email" />
 
-                    <template v-for="column in columns" :key="column[0]">
-                        <td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-                    </template>
+        <TextareaV name="text" id="text" placeholder="Сообщение" wrapperClasses="mb-4" :errors="errors.text" />
 
-                    <td class="col-3 placeholder-glow">
-                        <button class="btn placeholder rounded-0 fs-14 me-lg-3 me-xl-5 mb-lg-0 mb-2"><span class="opacity-0">Редактировать</span></button>
-                        <button class="btn placeholder rounded-0 fs-14"><span class="opacity-0">Удалить</span></button>
-                    </td>
-                </tr>
-
-                <tr v-else v-for="(item, index) in data" :key="item.id">
-                    <th class="ListingTable__row-number" scope="row">{{ index + 1 }}</th>
-
-                    <template v-for="column in columns" :key="column[0]">
-                        <slot v-if="column[2] == 'slot'" :name="column[1]" :item="item"></slot>
-
-                        <td v-else>{{ item[column[1]] }}</td>
-                    </template>
-
-                    <td class="col-3">
-                        <button class="btn btn-warning rounded-0 fs-14 me-lg-3 me-xl-5 mb-lg-0 mb-2" @click="editItem(item)">Редактировать</button>
-                        <button class="btn btn-danger rounded-0 fs-14" @click="deleteItem(item)">Удалить</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="text-center fw-bold w-100 fs-3" v-if="data.length == 0 && !isLoading">Нет данных</div>
-    </div>
+        <div class="d-flex justify-content-center">
+            <ButtonV @click="sendEmail" text="Отправить сообщение" class="btn btn-main-dark" />
+        </div>
+    </form>
 </template>
 
 <script>
+import InputV from './InputV.vue';
+import TextareaV from './TextareaV.vue';
+import Message from './Message.vue';
+import ButtonV from './ButtonV.vue';
+
 export default {
     props: {
-        columns: {
-            type: Array,
-            required: true,
-        },
-        data: {
-            type: Array,
-            required: true,
-        },
-        isLoading: {
-            type: Boolean,
-            default: false,
+        csrf_token: String,
+    },
+    data() {
+        return {
+            errors: [],
+            message: '',
+            messageType: null,
+            isLoading: false,
+            csrfToken: null,
         }
     },
-
     methods: {
-        editItem(item) {
-            // вызов функции редактирования элемента
-            this.$emit("edit-item", item);
-        },
+        async sendEmail() {
+            const form = this.$refs.form;
+            const formData = new FormData(form);
+            formData.append('_token', this.csrfToken);
 
-        deleteItem(item) {
-            // вызов функции удаления элемента
-            this.$emit("delete-item", item);
-        },
+            this.isLoading = true;
+
+            try {
+                const response = await window.axios.post('send/mail', formData);
+
+                this.$refs.form.reset();
+
+                this.messageType = 'success';
+                this.message = response.data;
+                this.$refs.notification.open();
+
+            } catch (error) {
+                if (error.response.status == 422) {
+                    this.errors = error.response.data;
+                    setTimeout(() => {
+                        this.errors = [];
+                    }, 3000);
+                } else if (error.response.status == 429) {
+                    this.$refs.form.reset();
+
+                    this.messageType = 'danger';
+                    this.message = error.response.data;
+                    this.$refs.notification.open();
+                } else {
+                    this.$refs.form.reset();
+
+                    this.messageType = 'danger';
+                    this.message = 'Ошибка, данные не отправлены';
+                    this.$refs.notification.open();
+                }
+                console.error(error);
+            }
+
+            this.isLoading = false;
+        }
     },
-
-};
+    mounted() {
+        this.csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    },
+    components: { InputV, TextareaV, Message, ButtonV }
+}
 </script>
-
-<style>
-.ListingTable__table .placeholder {
-    vertical-align: top;
-}
-
-.ListingTable__table button.placeholder {
-    background-color: currentColor !important;
-    pointer-events: none;
-}
-
-.ListingTable__row-number {
-    width: 1%;
-}
-</style>
