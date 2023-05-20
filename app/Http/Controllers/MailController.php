@@ -13,9 +13,6 @@ class MailController extends Controller
 {
     public function sendMail(Request $request)
     {
-        // $key = 'form_submitted_' . $request->session()->token();
-        // Session::forget($key);
-        // dd('dss');
         $validation = Validator::make($request->all(), [
             'name' => ['required', 'regex:/^[А-ЯЁа-яё\s]+$/u'],
             'phone' => ['required', 'regex:/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/'],
@@ -49,10 +46,19 @@ class MailController extends Controller
 
         try {
             // Обработка формы и отправка письма
-            Mail::send('emails.contactForm', ['name' => $request->name, 'phone' => $request->phone, 'email' => $request->email, 'text' => $request->text], function ($message) {
+
+            $counterFilePath = storage_path('app/appeal_counter.txt');
+            $file = fopen($counterFilePath, 'r+');
+            $appealCounter = (int) fgets($file);
+
+            Mail::send('emails.contactForm', ['name' => $request->name, 'phone' => $request->phone, 'email' => $request->email, 'text' => $request->text], function ($message) use ($appealCounter) {
                 $message->to('chipix@ustnn.net');
-                $message->subject('Обращение от клиента');
+                $message->subject('Обращение от клиента №' . $appealCounter);
             });
+
+            rewind($file); // Вернуть указатель файла в начало
+            fwrite($file, ++$appealCounter);
+            fclose($file);
 
             // Установка метки, что форма была отправлена
             Cache::put($formKey, true, 600); // Хранить метку в течение 10 минут
