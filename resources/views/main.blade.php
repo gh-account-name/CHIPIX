@@ -32,7 +32,7 @@ CHIPIX
                         <a href="{{route('catalogPage', ['category'=>'X'])}}" class="btn btn-main-dark btn-main-big">Все ПК</a>
                     </div>
                     <div class="slide-img col-lg-7 h-100">
-                        <img src="{{asset('img/slide1img.png')}}" alt="pc" class="h-100 w-100">
+                        <img src="{{asset('img/slide1img(logo).png')}}" alt="pc" class="h-100 w-100">
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@ CHIPIX
                         <a href="{{route('catalogPage', ['category'=>'X'])}}" class="btn btn-main-dark btn-main-big">Все мониторы</a>
                     </div>
                     <div class="slide-img col-lg-6 h-100">
-                        <img src="{{asset('img/slide2img.png')}}" alt="monitor" class="h-100 w-100">
+                        <img src="{{asset('img/slide2img(logo)(patr).png')}}" alt="monitor" class="h-100 w-100">
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@ CHIPIX
                         <a href="{{route('catalogPage', ['category'=>'X'])}}" class="btn btn-main-dark btn-main-big">Все моноблоки</a>
                     </div>
                     <div class="slide-img col-lg-7 h-100">
-                        <img src="{{asset('img/slide3img.png')}}" alt="monoblock" class="h-100 w-100">
+                        <img src="{{asset('img/slide3img(logo)(patr).png')}}" alt="monoblock" class="h-100 w-100">
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@ CHIPIX
                         <h2 class="fs-48 mb-4">Решения для национального проекта “Образование”</h2>
                     </div>
                     <div class="slide-img col-lg-6 h-100">
-                        <img src="{{asset('img/slide4img.png')}}" alt="laptop" class="h-100 w-100">
+                        <img src="{{asset('img/slide4img(logo)(patr).png')}}" alt="laptop" class="h-100 w-100">
                     </div>
                 </div>
             </div>
