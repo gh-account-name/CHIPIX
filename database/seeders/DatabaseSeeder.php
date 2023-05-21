@@ -21,5 +21,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'password' => bcrypt('123456')
         ]);
+
+        \App\Models\Direction::factory()->create([
+            'title' => 'Корпоративное направление',
+        ]);
+
+        \App\Models\Direction::factory()->create([
+            'title' => 'Направление госзакупок',
+        ]);
     }
 }
