@@ -9,7 +9,13 @@
                 <option v-if="data.length != 0" v-for="key in Object.keys(sortKeys)" :key="key" :value="key">{{ sortKeys[key] }}</option>
             </select>
         </div>
-        <div v-if="reverseButton" class="col-12 mt-3 mt-md-0 col-md-3">
+        <div v-if="filterKeys" class="col-12 mt-3 mt-md-0 col-md-3">
+            <select class="form-select input-main" v-model="filterKey">
+                <option value="">Не фильтровать</option>
+                <option v-if="data.length != 0" v-for="item in filterKeys.options" :key="`filter${item.id}`" :value="item.id">{{ item.title }}</option>
+            </select>
+        </div>
+        <div v-if="reverseButton" class="col-12 mt-3 mt-md-0 col-md-2">
             <CheckboxV labelText="В обратном порядке" id="isReversedCheckbox" v-model="isReversed" />
         </div>
     </div>
@@ -41,6 +47,7 @@ export default {
         return {
             searchValue: "",
             sortKey: "",
+            filterKey: "",
             isReversed: false,
         };
     },
@@ -72,11 +79,31 @@ export default {
             return [...this.searchInData]
         },
 
-        returnData() {
-            if (this.isReversed) {
-                return [...this.sortData].reverse();
+        filterData() {
+            if (this.filterKey) {
+                const filteredData = [...this.sortData].filter(item => {
+                    const evalString = 'item.' + this.filterKeys.path;
+                    const evalValue = eval(evalString);
+                    if (Array.isArray(evalValue)) {
+                        for (let EVitem of evalValue) {
+                            if (EVitem.id == this.filterKey) {
+                                return true
+                            }
+                        }
+                    } else {
+                        return evalValue.id == this.filterKey
+                    }
+                });
+                return filteredData
             }
             return [...this.sortData]
+        },
+
+        returnData() {
+            if (this.isReversed) {
+                return [...this.filterData].reverse();
+            }
+            return [...this.filterData]
         }
     },
 

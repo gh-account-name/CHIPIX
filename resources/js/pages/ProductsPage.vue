@@ -30,7 +30,8 @@
             </form>
         </Modal>
 
-        <SortFilter :data="products" :searchKeys="['title', 'id']" :sortKeys="{ title: 'Название' }" :reverseButton="true" class="mt-3 mt-md-5">
+        <SortFilter :data="products" :searchKeys="['title', 'id']" :sortKeys="{ title: 'Название' }" :filterKeys="{ options: categories, path: 'category' }" :reverseButton="true"
+            class="mt-3 mt-md-5">
             <template v-slot="{ processedData }">
                 <ListingTable ref="listingTable" class="mt-5"
                     :columns="[['Изображение', 'previewImage', 'slot'], ['Название', 'title', 'slot'], ['Категория', 'category', 'slot'], ['Направления', 'directions', 'slot']]"
@@ -322,8 +323,9 @@ export default {
 
         selectCategory(category) {
             this.selectedCategory = category;
+
             if (this.selectedItem?.category_id == category.id) {
-                this.characteristicsValues = this.selectedItem.characteristics.map(char => ({ id: char.id, title: char.title, value: char.pivot.value }));
+                this.characteristicsValues = this.selectedCategory.characteristics.map(char => ({ id: char.id, title: char.title, value: this.selectedItem.characteristics.find(itemChar => itemChar.id == char.id)?.pivot.value }));
             } else {
                 this.characteristicsValues = category.characteristics.map(char => ({ id: char.id, title: char.title, value: '' }));
             }
