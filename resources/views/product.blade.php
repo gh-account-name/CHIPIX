@@ -1,7 +1,8 @@
 @extends('layout.app')
 
 @section('stylesImports')
-{{-- <link rel="stylesheet" href="{{asset('css/product.css')}}"> --}}
+{{--
+<link rel="stylesheet" href="{{asset('css/product.css')}}"> --}}
 @vite('resources/css/product.css')
 @endsection
 
@@ -38,7 +39,7 @@
 
             <div id="productDescription" class="mt-5">
                 <p class="fs-3">Описание</p>
-                <p class="fs-4">{{$product->description}}</p>
+                <p class="fs-18">{{$product->description}}</p>
             </div>
         </div>
         <div class="col-lg-6 mb-5">
@@ -48,8 +49,8 @@
                 <tbody>
                     @foreach ($product->characteristics as $characteristic)
                     <tr class="fs-18">
-                        <td class="col-7 col-lg-4">{{$characteristic->title}}</td>
-                        <td>{{$characteristic->pivot->value}}</td>
+                        <td class="col-7 col-lg-4 fw-bold pe-1">{{$characteristic->title}}</td>
+                        <td class="ps-1">{{$characteristic->pivot->value}}</td>
                     </tr>
                     @endforeach
                 </tbody>
